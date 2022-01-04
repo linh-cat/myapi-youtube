@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 // config
 require("dotenv").config();
@@ -10,20 +9,19 @@ app.use(
     origin: "*",
   })
 );
-app.use(bodyParser.urlencoded());
-
-app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
 // define route
 const videoRoute = require("./src/route/video.route");
+const channelRoute = require("./src/route/channel.route");
 
 app.get("/", (req, res) => {
   res.send("Server youtube is running");
 });
 
 app.use("/video", videoRoute);
+app.use("/channel", channelRoute);
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
