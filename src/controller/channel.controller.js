@@ -5,9 +5,11 @@ const apiKey = process.env.API_KEY;
 const getChannelById = async (req, res) => {
   try {
     const channelId = req.params.id;
-    const part = req.query.part || "snippet";
+    const snippet = req.query.snippet || "snippet";
+    const statistics = req.query.statistics || "statistics";
+
     const data = await axios.get(
-      `${apiInstance}/channels?part=${part}&id=${channelId}&key=${apiKey}`
+      `${apiInstance}/channels?part=${snippet}&part=${statistics}&id=${channelId}&key=${apiKey}`
     );
     return res.status(200).json(data.data);
   } catch (error) {
